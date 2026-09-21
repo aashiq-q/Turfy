@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Turfly"
+description = "A multi-vendor turf booking marketplace where players discover local pitches, compare flexible pricing, and reserve time directly from approved turf owners."
+version = "1.0.0"
+id = "artifacts/turf-booking"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20468
+
+[services.development]
+run = "pnpm --filter @workspace/turf-booking run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/turf-booking", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/turf-booking/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20468"
+BASE_PATH = "/"

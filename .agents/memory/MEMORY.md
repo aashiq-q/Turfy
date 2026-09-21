@@ -1,0 +1,1 @@
+- [Orval Zod barrel collision](codegen-barrel-collision.md) — generated runtime schemas and parameter types can collide; keep the public barrel runtime-only.

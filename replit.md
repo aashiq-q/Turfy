@@ -1,6 +1,6 @@
-# [Project name]
+# Turfly
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Turfly is a multi-vendor turf booking marketplace for discovering, reserving, and managing local sports pitches.
 
 ## Run & Operate
 
@@ -22,23 +22,32 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/turf-booking` — public marketplace frontend and demo role surfaces
+- `artifacts/api-server/src/routes/marketplace.ts` — turf, availability, booking, review, and dashboard API handlers
+- `lib/api-spec/openapi.yaml` — source of truth for API contracts
+- `lib/db/src/schema/turfs.ts` — Drizzle schema for turfs, blocks, bookings, and reviews
+- `artifacts/turf-booking/public/images` — generated demo turf photography
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- API contracts are OpenAPI-first and generate the React Query client used by the frontend.
+- The first build uses the preconfigured PostgreSQL database with two approved demo turfs and seed-on-first-request data.
+- Relative image paths are used for local demo photography so the same UI works in preview and can later move to object storage.
+- The UI uses separate demo sessions for player, owner, and admin surfaces; production authentication and marketplace payouts are follow-up work.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Players can search approved turfs, filter by location/game/price, view availability, make a booking, and leave reviews after a completed booking.
+- Owners can submit listings, manage flexible time blocks, and see booking activity.
+- Admins can view marketplace summary metrics and approve or reject turf submissions.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Use Taste Skill and Impeccable as frontend quality guardrails: avoid generic AI layouts and keep visual hierarchy, accessibility, and responsive polish intentional.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Regenerating Orval output recreates `lib/api-zod/src/index.ts` with a wildcard export of generated TypeScript types that collides with generated Zod parameter schemas. Restore the barrel to export only `./generated/api` before running `pnpm run typecheck:libs`.
 
 ## Pointers
 
